@@ -22,6 +22,7 @@ module ConvertToMacro
       self.parse(issue.notes)
     end
     def controller_journals_edit_post(context={})
+      p context[:journal]
     end
   end
 end

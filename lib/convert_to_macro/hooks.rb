@@ -1,8 +1,8 @@
 module ConvertToMacro
   class Hooks < Redmine::Hook::Listener
     REGEXP_LIST = {
-      "(\s|,)(f?pr\d+\w*)(\s|,)" => '\1{{fixfile(\2)}}\3',
-      "vi?e?w:([A-Za-z0-9\._]+)" => '{{fixfile(\1)}}'
+      '(\A|\s|,)(f?pr\d+\w*)(\s|,|\Z)' => '\1{{fixfile(\2)}}\3',
+      'vi?e?w:([A-Za-z0-9\._]+)' => '{{fixfile(\1)}}'
       }
     def controller_issues_new_before_save(context={})
       issue = context[:issue]

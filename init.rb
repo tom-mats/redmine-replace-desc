@@ -1,3 +1,5 @@
+require "convert_to_macro/hooks"
+
 Redmine::Plugin.register :redmine_replace_desc do
   name 'Redmine Replace Desc plugin'
   author 'Author name'

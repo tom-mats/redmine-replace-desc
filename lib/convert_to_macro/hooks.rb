@@ -8,11 +8,17 @@ module ConvertToMacro
       issue = context[:issue]
       p issue.description
       REGEXP_LIST.each do |k, v|
+        p k + ", " + v
         issue.description.gsub!(/#{k}/, v)
       end
     end
     def controller_issues_edit_before_save(context={})
+      issue = context[:issue]
+      p issue.description
+      REGEXP_LIST.each do |k, v|
+        p k + ", " + v
+        issue.description.gsub!(/#{k}/, v)
+      end
     end
   end
 end
-  

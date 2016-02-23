@@ -7,18 +7,21 @@ module ConvertToMacro
       '#(?:RB|rb|US|us)(\d+)' => '{{usersupport(\1)}}',
       '(V\d\.\d\d(?:\d+|P\/(?:\d|\w)+))' => '\1[[test:\2]]\3'
       }
+    def parse(data)
+      REGEXP_LIST.each do |k, v|
+        data.gsub!(/(\A|[^\(])#{k}(\Z|[^\)])/, v)
+      end
+    end
     def controller_issues_new_before_save(context={})
       issue = context[:issue]
-      REGEXP_LIST.each do |k, v|
-        issue.description.gsub!(/(\A|[^\(])#{k}(\Z|[^\)])/, v)
-      end
+      self.parse(issue.description)
     end
     def controller_issues_edit_before_save(context={})
       issue = context[:issue]
-      REGEXP_LIST.each do |k, v|
-        issue.description.gsub!(/(\A|[^\(])#{k}(\Z|[^\)])/, v)
-        issue.notes.gsub!(/(\A|[^\(])#{k}(\Z|[^\)])/, v)
-      end
+      self.parse(issue.description)
+      self.parse(issue.notes)
+    end
+    def controller_journals_edit_post(context={})
     end
   end
 end
